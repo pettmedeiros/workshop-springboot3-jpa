@@ -6,8 +6,6 @@ import com.educandoweb.course.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long>  {
 	
-	//JPARepository possui uma implementação pradrão, logo não precisa implementar 
+	//JPARepository possui uma implementação padrão, logo não precisa implementar 
 	
-	
-
 }
