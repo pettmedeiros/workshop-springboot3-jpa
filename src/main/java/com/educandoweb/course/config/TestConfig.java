@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.OrderItem;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -25,10 +26,10 @@ import com.educandoweb.course.repositories.UserRepository;
 public class TestConfig implements CommandLineRunner { //permite executar um código específico assim que a aplicação é iniciada.
 	
 	@Autowired // Injeta automaticamente uma instância de UserRepository para acessar o banco de dados e salvar objetos User
-	private OrderRepository userRepository;
+	private OrderRepository orderRepository;
 	
 	@Autowired
-	private UserRepository orderRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -59,8 +60,8 @@ public class TestConfig implements CommandLineRunner { //permite executar um có
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 		
-		orderRepository.saveAll(Arrays.asList(u1, u2));
-		userRepository.saveAll(Arrays.asList(o1, o2, o3));//salva as instâncias no banco de dados, armazenando-as na tabela associada a User.
+		userRepository.saveAll(Arrays.asList(u1, u2));//salva as instâncias no banco de dados, armazenando-as na tabela associada a User.
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
@@ -79,9 +80,11 @@ public class TestConfig implements CommandLineRunner { //permite executar um có
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
+		
 	}
-	
-	
-	
-
 }
