@@ -16,7 +16,7 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 ## Tecnologias Utilizadas
 
 - **Java** 17
-- **Spring Boot** 4.4.26
+- **Spring Boot** 3.3.5
 - **JPA/Hibernate** para persistência de dados
 - **Maven** para gerenciamento de dependências
 - **H2 Database** (banco de dados em memória para testes)
